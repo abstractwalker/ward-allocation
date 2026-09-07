@@ -42,11 +42,11 @@ async function loadRooms() {
 
   if (error) {
     console.error("Could not load rooms:", error);
-    showMessage(`Could not load rooms: ${error.message}`, "danger");
+    showMessage(`Не вдалося завантажити палати: ${error.message}`, "danger");
     return;
   }
 
-  roomSelect.innerHTML = '<option value="">Select a room</option>';
+  roomSelect.innerHTML = '<option value="">Виберіть палату</option>';
   roomsList.innerHTML = "";
   data.forEach((room) => {
     roomSelect.insertAdjacentHTML(
@@ -59,8 +59,8 @@ async function loadRooms() {
         <td>${room.name}</td>
         <td>${room.description || ""}</td>
         <td>
-          <button class="btn btn-sm btn-outline-primary edit-room-button" data-id="${room.id}">Edit</button>
-          <button class="btn btn-sm btn-outline-danger delete-room-button" data-id="${room.id}">Delete</button>
+          <button class="btn btn-sm btn-outline-primary edit-room-button" data-id="${room.id}">Редагувати</button>
+          <button class="btn btn-sm btn-outline-danger delete-room-button" data-id="${room.id}">Видалити</button>
         </td>
       </tr>`
     );
@@ -88,7 +88,7 @@ async function saveRoom(event) {
   const description = roomDescriptionInput.value.trim();
 
   if (!name) {
-    showMessage("Room name is required.", "danger");
+    showMessage("Назва палати є обов'язковою.", "danger");
     return;
   }
 
@@ -99,20 +99,20 @@ async function saveRoom(event) {
 
   if (error) {
     console.error("Could not save room:", error);
-    showMessage(`Could not save room: ${error.message}`, "danger");
+    showMessage(`Не вдалося зберегти палату: ${error.message}`, "danger");
     return;
   }
 
   const messageText = editingRoomId
-    ? "Room updated successfully."
-    : "Room created successfully.";
+    ? "Палату успішно оновлено."
+    : "Палату успішно створено.";
   hideRoomForm();
   await loadRooms();
   showMessage(messageText, "success");
 }
 
 async function deleteRoom(roomId) {
-  if (!window.confirm("Delete this room?")) {
+  if (!window.confirm("Видалити цю палату?")) {
     return;
   }
 
@@ -123,11 +123,11 @@ async function deleteRoom(roomId) {
 
   if (error) {
     console.error("Could not delete room:", error);
-    showMessage(`Could not delete room. It may be used by a reservation: ${error.message}`, "danger");
+    showMessage(`Не вдалося видалити палату. Можливо, вона використовується в розміщенні: ${error.message}`, "danger");
     return;
   }
 
-  showMessage("Room deleted successfully.", "success");
+  showMessage("Палату успішно видалено.", "success");
   await loadRooms();
 }
 
@@ -139,11 +139,11 @@ async function loadClients() {
 
   if (error) {
     console.error("Could not load clients:", error);
-    showMessage(`Could not load clients: ${error.message}`, "danger");
+    showMessage(`Не вдалося завантажити пацієнтів: ${error.message}`, "danger");
     return;
   }
 
-  clientSelect.innerHTML = '<option value="">Select a client</option>';
+  clientSelect.innerHTML = '<option value="">Виберіть пацієнта</option>';
   clientsList.innerHTML = "";
   data.forEach((client) => {
     clientSelect.insertAdjacentHTML(
@@ -156,8 +156,8 @@ async function loadClients() {
         <td>${client.name}</td>
         <td>${client.description || ""}</td>
         <td>
-          <button class="btn btn-sm btn-outline-primary edit-client-button" data-id="${client.id}">Edit</button>
-          <button class="btn btn-sm btn-outline-danger delete-client-button" data-id="${client.id}">Delete</button>
+          <button class="btn btn-sm btn-outline-primary edit-client-button" data-id="${client.id}">Редагувати</button>
+          <button class="btn btn-sm btn-outline-danger delete-client-button" data-id="${client.id}">Видалити</button>
         </td>
       </tr>`
     );
@@ -185,7 +185,7 @@ async function saveClient(event) {
   const description = clientDescriptionInput.value.trim();
 
   if (!name) {
-    showMessage("Client name is required.", "danger");
+    showMessage("Ім'я пацієнта є обов'язковим.", "danger");
     return;
   }
 
@@ -196,20 +196,20 @@ async function saveClient(event) {
 
   if (error) {
     console.error("Could not save client:", error);
-    showMessage(`Could not save client: ${error.message}`, "danger");
+    showMessage(`Не вдалося зберегти пацієнта: ${error.message}`, "danger");
     return;
   }
 
   const messageText = editingClientId
-    ? "Client updated successfully."
-    : "Client created successfully.";
+    ? "Пацієнта успішно оновлено."
+    : "Пацієнта успішно створено.";
   hideClientForm();
   await loadClients();
   showMessage(messageText, "success");
 }
 
 async function deleteClient(clientId) {
-  if (!window.confirm("Delete this client?")) {
+  if (!window.confirm("Видалити цього пацієнта?")) {
     return;
   }
 
@@ -220,16 +220,16 @@ async function deleteClient(clientId) {
 
   if (error) {
     console.error("Could not delete client:", error);
-    showMessage(`Could not delete client. It may be used by a reservation: ${error.message}`, "danger");
+    showMessage(`Не вдалося видалити пацієнта. Можливо, він використовується в розміщенні: ${error.message}`, "danger");
     return;
   }
 
-  showMessage("Client deleted successfully.", "success");
+  showMessage("Пацієнта успішно видалено.", "success");
   await loadClients();
 }
 
 async function loadReservations() {
-  showMessage("Loading reservations...", "info");
+  showMessage("Завантаження розміщень...", "info");
 
   const { data, error } = await supabaseClient
     .from("reservations")
@@ -237,7 +237,7 @@ async function loadReservations() {
 
   if (error) {
     console.error("Could not load reservations:", error);
-    showMessage(`Could not load reservations: ${error.message}`, "danger");
+    showMessage(`Не вдалося завантажити розміщення: ${error.message}`, "danger");
     return;
   }
 
@@ -249,7 +249,7 @@ async function loadReservations() {
       <td>${reservation.date_to || "-"}</td>
       <td>
         <button class="btn btn-sm btn-outline-danger delete-reservation-button" data-id="${reservation.id}">
-          Delete
+          Видалити
         </button>
       </td>
     </tr>
@@ -258,7 +258,7 @@ async function loadReservations() {
 }
 
 async function deleteReservation(reservationId, reservationDetails) {
-  if (!window.confirm(`Delete the reservation for ${reservationDetails}?`)) {
+  if (!window.confirm(`Видалити розміщення для ${reservationDetails}?`)) {
     return;
   }
 
@@ -269,11 +269,11 @@ async function deleteReservation(reservationId, reservationDetails) {
 
   if (error) {
     console.error("Could not delete reservation:", error);
-    showMessage(`Could not delete reservation: ${error.message}`, "danger");
+    showMessage(`Не вдалося видалити розміщення: ${error.message}`, "danger");
     return;
   }
 
-  showMessage("Reservation deleted successfully.", "success");
+  showMessage("Розміщення успішно видалено.", "success");
   await loadReservations();
 }
 
@@ -286,12 +286,12 @@ reservationForm.addEventListener("submit", async (event) => {
   const dateTo = document.querySelector("#date_to").value;
 
   if (!roomId || !clientId || !dateFrom || !dateTo) {
-    showMessage("Please select a room and client and enter both dates.", "danger");
+    showMessage("Виберіть палату та пацієнта і введіть обидві дати.", "danger");
     return;
   }
 
   if (dateFrom >= dateTo) {
-    showMessage("The From date must be before the To date.", "danger");
+    showMessage("Дата початку має бути раніше дати завершення.", "danger");
     return;
   }
 
@@ -302,7 +302,7 @@ reservationForm.addEventListener("submit", async (event) => {
 
   if (conflictError) {
     console.error("Could not check reservation conflicts:", conflictError);
-    showMessage(`Could not check room availability: ${conflictError.message}`, "danger");
+    showMessage(`Не вдалося перевірити доступність палати: ${conflictError.message}`, "danger");
     return;
   }
 
@@ -313,7 +313,7 @@ reservationForm.addEventListener("submit", async (event) => {
   if (conflictingReservation) {
     const roomName = conflictingReservation.room?.name || roomSelect.selectedOptions[0].textContent;
     showMessage(
-      `${roomName} is already reserved from ${conflictingReservation.date_from} to ${conflictingReservation.date_to}.`,
+      `${roomName} вже зайнята з ${conflictingReservation.date_from} до ${conflictingReservation.date_to}.`,
       "danger"
     );
     return;
@@ -330,13 +330,13 @@ reservationForm.addEventListener("submit", async (event) => {
 
   if (error) {
     console.error("Could not save reservation:", error);
-    showMessage(`Could not save reservation: ${error.message}`, "danger");
+    showMessage(`Не вдалося зберегти розміщення: ${error.message}`, "danger");
     return;
   }
 
   reservationForm.reset();
   await loadReservations();
-  showMessage("Reservation saved successfully.", "success");
+  showMessage("Розміщення успішно збережено.", "success");
 });
 
 reservationsList.addEventListener("click", (event) => {

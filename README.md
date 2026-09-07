@@ -1,5 +1,6 @@
-# room-reservation
-Simple room reservation application.  
+# ward-allocation
+Simple application to allocate wards in hospital.
+Duplicate and extension of "room reservation" project.  
 Created via AI-assisted development.
 
 05.09.2026          

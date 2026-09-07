@@ -4,8 +4,7 @@ Created via AI-assisted development.
 
 05.09.2026          
 
-Prototype. Basic CRUD functionality.
-At that point, the prototype has a minimal functionality: 
+Prototype. At that point, the application has minimal functionality: 
 * Rooms CRUD + Clients CRUD + Reservations create/delete (without unnecessary editing complexity) + conflict checking.
 
 07.09.2026  
